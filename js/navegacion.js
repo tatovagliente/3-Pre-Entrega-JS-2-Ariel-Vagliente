@@ -1,12 +1,11 @@
-// Crear el contenedor de la barra de navegación
+
 const navBar = document.createElement("nav");
 navBar.classList.add("navbar");
 
-// Crear el contenedor para los enlaces
 const navContainer = document.createElement("div");
 navContainer.classList.add("navbar-container");
 
-// Crear los enlaces
+
 const links = [
     { text: "INICIO", href: "#" },
     { text: "NOSOTROS", href: "#" },
@@ -21,13 +20,13 @@ links.forEach(linkInfo => {
     navContainer.appendChild(link);
 });
 
-// Añadir el contenedor de los enlaces a la barra de navegación
+
 navBar.appendChild(navContainer);
 
-// Añadir la barra de navegación al cuerpo del documento
+
 document.body.insertBefore(navBar, document.body.firstChild);
 
-// CSS básico para la barra de navegación
+
 const style = document.createElement('style');
 style.innerHTML = `
     .navbar {
