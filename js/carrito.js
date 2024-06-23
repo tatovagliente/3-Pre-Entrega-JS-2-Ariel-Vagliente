@@ -33,8 +33,61 @@ const pintarCarrito = () => {
     const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
     const compraTotal = document.createElement("div");
     compraTotal.className = "total-content";
+    compraTotal.style.display = "flex";
+    compraTotal.style.justifyContent = "space-evenly";
+    compraTotal.style.alignItems = "center";
+    compraTotal.style.width = "100%";
     compraTotal.innerHTML = `Total a pagar: $${total}`;
     modalContainer.append(compraTotal);
+
+    const vaciarButton = document.createElement("button");
+    vaciarButton.innerText = "VACIAR CARRITO";
+    vaciarButton.className = "vaciar-button";
+    const vaciarButtonStyles = {
+        marginRight: "20px",
+        backgroundColor: "#dc3545",
+        color: "#fff",
+        border: "none",
+        padding: "10px 20px",
+        cursor: "pointer",
+        fontSize: "16px",
+        borderRadius: "5px"
+    };
+    Object.assign(vaciarButton.style, vaciarButtonStyles);
+
+    vaciarButton.addEventListener("click", () => {
+        carrito = [];
+        localStorage.removeItem("carritoLocal");
+        carritoCounter();
+        pintarCarrito();
+    });
+
+    compraTotal.prepend(vaciarButton);
+
+    const comprarButton = document.createElement("button");
+    comprarButton.innerText = "COMPRAR";
+    comprarButton.className = "comprar-button";
+    const comprarButtonStyles = {
+        marginLeft: "20px",
+        backgroundColor: "#28a745",
+        color: "#fff",
+        border: "none",
+        padding: "10px 20px",
+        cursor: "pointer",
+        fontSize: "16px",
+        borderRadius: "5px",
+    }
+    Object.assign(comprarButton.style, comprarButtonStyles);
+
+    comprarButton.addEventListener("click", () => {
+        alert(`Gracias por tu compra. El total a pagar es de: $${total}`);
+        carrito = [];
+        localStorage.removeItem("carritoLocal");
+        carritoCounter();
+        pintarCarrito();
+    });
+
+    compraTotal.append(comprarButton);
 };
 
 const eliminarProducto = (id) => {
@@ -44,10 +97,11 @@ const eliminarProducto = (id) => {
     pintarCarrito();
 };
 
-const carritoCounter = () => {
+function carritoCounter ()  {
     cantidadCarrito.style.display = carrito.length ? "block" : "none";
     cantidadCarrito.innerText = carrito.length;
     localStorage.setItem("carritoSacar", JSON.stringify(carrito.length));
 };
+
 
 verCarrito.addEventListener("click", pintarCarrito);

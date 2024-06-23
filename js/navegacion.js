@@ -5,7 +5,6 @@ navBar.classList.add("navbar");
 const navContainer = document.createElement("div");
 navContainer.classList.add("navbar-container");
 
-
 const links = [
     { text: "INICIO", href: "#" },
     { text: "NOSOTROS", href: "#" },
